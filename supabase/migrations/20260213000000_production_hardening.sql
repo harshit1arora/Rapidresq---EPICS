@@ -35,25 +35,30 @@ ALTER TABLE public.user_medicines ENABLE ROW LEVEL SECURITY;
 -- 5. RLS Policies
 
 -- Notifications: Users can only see their own notifications
-CREATE POLICY IF NOT EXISTS "Users can view their own notifications" 
+DROP POLICY IF EXISTS "Users can view their own notifications" ON public.notifications;
+CREATE POLICY "Users can view their own notifications" 
 ON public.notifications FOR SELECT 
 USING (auth.uid() = user_id);
 
-CREATE POLICY IF NOT EXISTS "System/Admins can insert notifications" 
+DROP POLICY IF EXISTS "System/Admins can insert notifications" ON public.notifications;
+CREATE POLICY "System/Admins can insert notifications" 
 ON public.notifications FOR INSERT 
 WITH CHECK (true); -- Usually restricted to service_role, but for MVP we allow authenticated
 
 -- Profiles: Users can view all profiles (for driver discovery) but only edit their own
-CREATE POLICY IF NOT EXISTS "Users can view all profiles" 
+DROP POLICY IF EXISTS "Users can view all profiles" ON public.profiles;
+CREATE POLICY "Users can view all profiles" 
 ON public.profiles FOR SELECT 
 USING (true);
 
-CREATE POLICY IF NOT EXISTS "Users can update own profile" 
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
+CREATE POLICY "Users can update own profile" 
 ON public.profiles FOR UPDATE 
 USING (auth.uid() = user_id);
 
 -- Bookings: Users see their own, operators see all
-CREATE POLICY IF NOT EXISTS "Users can view own bookings" 
+DROP POLICY IF EXISTS "Users can view own bookings" ON public.bookings;
+CREATE POLICY "Users can view own bookings" 
 ON public.bookings FOR SELECT 
 USING (auth.uid() = user_id OR EXISTS (
     SELECT 1 FROM public.profiles 

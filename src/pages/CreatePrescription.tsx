@@ -73,13 +73,14 @@ const CreatePrescription = () => {
       return;
     }
 
-    // Check if user is operator or admin
-    const { data: roles } = await supabase
-      .from('user_roles')
+    // Check if user is operator, doctor, or admin
+    const { data: profile } = await supabase
+      .from('profiles')
       .select('role')
-      .eq('user_id', user.id);
+      .eq('user_id', user.id)
+      .single();
 
-    const hasAccess = roles?.some(r => r.role === 'operator' || r.role === 'admin');
+    const hasAccess = profile?.role === 'doctor' || profile?.role === 'operator' || profile?.role === 'admin';
     if (!hasAccess) {
       toast({
         title: "Access Denied",

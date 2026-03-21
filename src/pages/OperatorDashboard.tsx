@@ -216,10 +216,11 @@ const OperatorDashboard = () => {
         return;
       }
 
-      const { data: userRoles, error } = await supabase
-        .from('user_roles')
+      const { data: profile, error } = await supabase
+        .from('profiles')
         .select('role')
-        .eq('user_id', user.id);
+        .eq('user_id', user.id)
+        .single();
 
       if (error) {
         console.error('Error checking role:', error);
@@ -228,9 +229,7 @@ const OperatorDashboard = () => {
         return;
       }
 
-      const hasOperatorAccess = userRoles?.some(
-        (r) => r.role === 'operator' || r.role === 'admin'
-      );
+      const hasOperatorAccess = profile?.role === 'operator' || profile?.role === 'admin';
 
       if (!hasOperatorAccess) {
         toast.error('You do not have operator privileges.');

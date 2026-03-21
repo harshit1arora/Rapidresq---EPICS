@@ -119,12 +119,13 @@ const HospitalDashboard = () => {
         return;
       }
 
-      const { data: userRoles } = await supabase
-        .from('user_roles')
+      const { data: profile } = await supabase
+        .from('profiles')
         .select('role')
-        .eq('user_id', user.id);
+        .eq('user_id', user.id)
+        .single();
 
-      const hasAccess = userRoles?.some(r => r.role === 'operator' || r.role === 'admin');
+      const hasAccess = profile?.role === 'hospital' || profile?.role === 'admin' || profile?.role === 'operator';
       
       if (!hasAccess) {
         toast.error('You do not have hospital access.');

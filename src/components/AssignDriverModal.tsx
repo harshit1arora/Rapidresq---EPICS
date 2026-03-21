@@ -23,11 +23,12 @@ import { Loader2, User, Phone, Truck, Clock } from 'lucide-react';
 
 // Predefined drivers for quick selection
 const AVAILABLE_DRIVERS = [
-  { id: '1', name: 'Rajesh Kumar', phone: '+91 98765 43210', vehicle: 'DL-1234-AMB' },
-  { id: '2', name: 'Amit Singh', phone: '+91 87654 32109', vehicle: 'DL-5678-AMB' },
-  { id: '3', name: 'Suresh Sharma', phone: '+91 76543 21098', vehicle: 'DL-9012-AMB' },
-  { id: '4', name: 'Vikram Patel', phone: '+91 65432 10987', vehicle: 'DL-3456-AMB' },
-  { id: '5', name: 'Ravi Verma', phone: '+91 54321 09876', vehicle: 'DL-7890-AMB' },
+  { id: '1', name: 'Kartikey (Verified Sandbox)', phone: '+919717569478', vehicle: 'DL-9999-AMB' },
+  { id: '2', name: 'Rajesh Kumar', phone: '+91 98765 43210', vehicle: 'DL-1234-AMB' },
+  { id: '3', name: 'Amit Singh', phone: '+91 87654 32109', vehicle: 'DL-5678-AMB' },
+  { id: '4', name: 'Suresh Sharma', phone: '+91 76543 21098', vehicle: 'DL-9012-AMB' },
+  { id: '5', name: 'Vikram Patel', phone: '+91 65432 10987', vehicle: 'DL-3456-AMB' },
+  { id: '6', name: 'Ravi Verma', phone: '+91 54321 09876', vehicle: 'DL-7890-AMB' },
 ];
 
 interface AssignDriverModalProps {
